@@ -7,6 +7,7 @@
     var idRols = User.Claims.FirstOrDefault(x => x.Type == TypeClaims.IdRol).Value;
     bool isAdmin = idRols.Any(x => x.ToString() == Convert.ToInt32(Enums.RolUser.Administrador).ToString());
     bool isEstand = idRols.Any(x => x.ToString() == Convert.ToInt32(Enums.RolUser.Estandar).ToString());
+    string userName = User.Claims.FirstOrDefault(x => x.Type == TypeClaims.UserName).Value.ToString();
 }
 
 <!DOCTYPE html>
@@ -38,7 +39,7 @@
                         @if (User != null)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" title="Manage">Hola!</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" title="">Hola @userName!</a>
                             </li>
                             <li class="nav-item">
                                 <form class="form-inline" asp-area="" asp-controller="Auth" asp-action="Logout" method="get">

@@ -13,6 +13,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using static Common.Utils.Constant.Const;
+using System.Net.Http;
+using Common.Utils.Resources;
 
 namespace libreriaNeoris.Controllers
 {
@@ -31,7 +33,7 @@ namespace libreriaNeoris.Controllers
         #endregion
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login() 
         {
             return View(new UserDto());
         }
@@ -39,7 +41,21 @@ namespace libreriaNeoris.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(UserDto user)
         {
-            ResponseDto response = await _userServices.Login(user);
+            ResponseDto response;
+            try
+            {
+                response = await _userServices.Login(user);
+            }
+            // Cpaturar el error al conectar con la api, o no responde
+            catch (HttpRequestException ex) 
+            {
+                ModelState.Clear();
+                // Envia mensaje de error como data notation
+                ModelState.AddModelError(string.Empty, GeneralMessages.GeneralError); 
+                return View(user);
+            }
+
+            //ResponseDto response = await _userServices.Login(user);
 
             if (!response.IsSuccess)
             {
@@ -52,12 +68,15 @@ namespace libreriaNeoris.Controllers
                 TokenDto token = JsonConvert.DeserializeObject<TokenDto>(response.Result.ToString());
                 string idRoles = Utils.GetClaimValue(token.Token, TypeClaims.IdRol);
                 string idUser = Utils.GetClaimValue(token.Token, TypeClaims.IdUser);
+                string userName = Utils.GetClaimValue(token.Token, TypeClaims.UserName);
+
                 var claims = new List<Claim>
                 {
                     new Claim("Token", token.Token),
                     new Claim("Expiration", token.Expiration.ToString()),
                     new Claim(TypeClaims.IdRol,idRoles),
                     new Claim(TypeClaims.IdUser,idUser),
+                    new Claim(TypeClaims.UserName, userName),
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -108,23 +127,34 @@ namespace libreriaNeoris.Controllers
             return View(new UserDto());
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Register(UserDto user)
-        //{
-        //    IActionResult response;
+        [HttpPost]
+        public async Task<IActionResult> Register(UserDto user)
+        {
+            IActionResult response;
+            ResponseDto result;
 
-        //    var result = await _userServices.Register(user);
-        //    if (!result.IsSuccess)
-        //    {
-        //        ModelState.Clear();
-        //        ModelState.AddModelError(string.Empty, result.Message);
-        //        return View(user);
-        //    }
-        //    else
-        //    {
-        //        response = RedirectToAction(nameof(Login));
-        //    }
-        //    return response;
-        //}
+            try
+            {
+               result = await _userServices.Register(user);
+            }
+            catch (Exception ex)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, GeneralMessages.GeneralError);
+                return View(user);
+            }
+            //var result = await _userServices.Register(user);
+            if (!result.IsSuccess)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(user);
+            }
+            else
+            {
+                response = RedirectToAction(nameof(Login));
+            }
+            return response;
+        }
     }
 }

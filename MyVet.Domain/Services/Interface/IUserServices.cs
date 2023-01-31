@@ -8,6 +8,7 @@ namespace libreriaNeoris.Domain.Services.Interface
     {
 
         Task<ResponseDto> Login(UserDto user);
+        Task<ResponseDto> Register(UserDto user);
         Task<ResponseDto> GetAllUsers(string token);
 
     }

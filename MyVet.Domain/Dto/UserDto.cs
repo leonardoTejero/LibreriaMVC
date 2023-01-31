@@ -30,7 +30,7 @@ namespace libreriaNeoris.Domain.Dto
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
 
-        public string Email { get; set; }
+        public string Email { get; set; } // ?? 
         public int IdRol { get; set; }
     }
 }

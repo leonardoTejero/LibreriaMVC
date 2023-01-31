@@ -35,7 +35,7 @@ namespace libreriaNeoris.Handlers
             };
 
             if (responseExeption.Status == StatusCodes.Status500InternalServerError)
-                context.HttpContext.Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase ="Ha ocurrido un error";
+                context.HttpContext.Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = "Ha ocurrido un error";
         }
     }
 }

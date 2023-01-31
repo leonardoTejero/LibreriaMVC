@@ -11,6 +11,7 @@ using Common.Utils.RestServices.Interface;
 using Microsoft.Extensions.Configuration;
 using libreriaNeoris.Domain.Dto.RestServoces;
 using Newtonsoft.Json;
+using LibreriaNeoris.Domain.Dto.Rest;
 
 namespace libreriaNeoris.Domain.Services
 {
@@ -43,7 +44,7 @@ namespace libreriaNeoris.Domain.Services
                 UserName = user.UserName, 
             };
             Dictionary<string, string> headers = new Dictionary<string, string>();
-            ResponseDto resultToken =await _restService.PostRestServiceAsync<ResponseDto>(urlBase, controller, method, parameters, headers);
+            ResponseDto resultToken = await _restService.PostRestServiceAsync<ResponseDto>(urlBase, controller, method, parameters, headers);
 
             return resultToken;
         }
@@ -65,10 +66,32 @@ namespace libreriaNeoris.Domain.Services
             if (response.IsSuccess)
                 response.Result = JsonConvert.DeserializeObject<List<UserDto>>(response.Result.ToString());
 
-
             return response;
         }
 
+        public async Task<ResponseDto> Register(UserDto user)
+        {
+            string urlBase = _config.GetSection("ApiLibreriaNeoris").GetSection("UrlBase").Value;
+            string controller = _config.GetSection("ApiLibreriaNeoris").GetSection("ControlerAuthentication").Value;
+            string method = _config.GetSection("ApiLibreriaNeoris").GetSection("MethodRegister").Value;
+
+            UserDto parameters = new UserDto()
+            {
+                UserName = user.UserName,
+                Name = user.Name,
+                LastName = user.LastName,
+                Password = user.Password,
+                ConfirmPassword = user.ConfirmPassword,
+            };
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            ResponseDto response = await _restService.PostRestServiceAsync<ResponseDto>(urlBase, controller, method, parameters, headers);
+            //if (response.IsSuccess)
+                //return response;
+
+            return response;
+        }
         #endregion
     }
 }

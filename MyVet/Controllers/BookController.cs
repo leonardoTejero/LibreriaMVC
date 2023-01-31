@@ -36,7 +36,7 @@ namespace Libreria.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllBooks()
         {
-            //Extraer la info del calim, autor, expiracion, id user, id rol
+            //Extraer la info del claim, autor, expiracion, id user, id rol
             var user = HttpContext.User;
             string token = user.Claims.FirstOrDefault(x => x.Type == TypeClaims.Token).Value;
 
