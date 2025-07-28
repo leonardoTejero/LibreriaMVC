@@ -46,7 +46,7 @@ namespace libreriaNeoris.Controllers
             {
                 response = await _userServices.Login(user);
             }
-            // Cpaturar el error al conectar con la api, o no responde
+            // Capturar el error al conectar con la api, o no responde
             catch (HttpRequestException ex) 
             {
                 ModelState.Clear();
@@ -143,7 +143,7 @@ namespace libreriaNeoris.Controllers
                 ModelState.AddModelError(string.Empty, GeneralMessages.GeneralError);
                 return View(user);
             }
-            //var result = await _userServices.Register(user);
+
             if (!result.IsSuccess)
             {
                 ModelState.Clear();

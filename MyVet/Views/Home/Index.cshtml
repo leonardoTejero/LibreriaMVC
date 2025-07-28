@@ -3,6 +3,68 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Bienvenidos a la libreria de Neoris</h1>
+    <h1 class="display-4">Bienvenidos a la libreria</h1>
     <p>Todos los libros que buscas!</p>
 </div>
+
+<div >
+    <div id="card-container" class="mb-5"></div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+    // Número de tarjetas a mostrar 
+    var numCardsToShow = 12; 
+
+    $(document).ready(function () {
+
+        obtenerLibros().then(function (books) 
+        {
+            var limitedBooks = books.slice(0, numCardsToShow);
+            cargarGridBooks(limitedBooks)
+        }).catch(function (error) {
+            Swal.fire('No se pudo cargar los libros', "Ocurrio un error", 'error');
+        });
+
+    });
+
+
+    function cargarGridBooks(books) {
+        var cardContainer = document.getElementById('card-container');
+
+        // Limpiar el contenedor antes de agregar las nuevas tarjetas
+        cardContainer.innerHTML = '';
+
+        // Iterar sobre cada libro y crear una tarjeta para cada uno
+        books.forEach(function (book) {
+            var card = document.createElement('div');
+            card.className = 'card';
+            card.style.width = '15rem';
+
+            var img = document.createElement('img');
+            img.src = "https://previews.123rf.com/images/rastudio/rastudio1507/rastudio150700457/42340962-abrir-el-libro-icono-de-l%C3%ADnea-delgada-para-la-web-y-el-dise%C3%B1o-minimalista-plana-m%C3%B3vil-vector-icono.jpg";
+            img.className = 'card-img-top';
+            img.alt = 'Book Image';
+            card.appendChild(img);
+
+            var cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+
+            var title = document.createElement('h5');
+            title.className = 'card-title';
+            title.textContent = book.name;
+            cardBody.appendChild(title);
+
+            var description = document.createElement('p');
+            description.className = 'card-text';
+            description.textContent = book.author;
+            cardBody.appendChild(description);
+
+            card.appendChild(cardBody);
+            cardContainer.appendChild(card);
+        });
+    }
+
+
+</script>

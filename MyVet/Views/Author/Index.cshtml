@@ -13,24 +13,24 @@
     <h1>Listado de Autores</h1>
 
 @{
-    if (isAdmin || isEstand)
+    if (isAdmin)
     {
      <p>
         <button class="btn btn-primary" onclick="nuevoAutor()">
-            Nuevo Autor
+                <i class="fas fa-plus"></i> Nuevo Autor
         </button>
     </p>
     }
 }
 
 
-    <div class="row">
-
+<div class="row mt-5 mb-5">
+    <div class="col p-0">
         <table class="table">
-            <thead class="thead-dark">
+            <thead class="table-dark">
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
+                    <th class="col-md-6">Nombre</th>
+                    <th class="col-md-6">Apellido</th>
                     @{
                         if (isAdmin || isEstand)
                         {
@@ -42,8 +42,8 @@
 
             <tbody id="cuerpoAutores"></tbody>
         </table>
-
     </div>
+</div>
 
 
     @*modal*@
@@ -72,7 +72,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <i class="fas fa-window-close"></i>
                         Cancelar
                     </button>
@@ -151,7 +151,7 @@
         }
     }
 
-function eliminarAutor(idAutor)
+    function eliminarAutor(idAutor)
     {
         console.log("mandó a eliminar", idAutor);
         Swal.fire({
@@ -208,7 +208,8 @@ function eliminarAutor(idAutor)
     function nuevoAutor(){
 
        $('#idTituloModalAutor').html("Crear Autor");
-       $('#modalAutor').modal({keyboard:true});
+       $('#modalAutor').modal("show");
+       limpiarForm();
     }
 
     function guardarAutor(){
@@ -319,7 +320,7 @@ function eliminarAutor(idAutor)
         $('#txtLastNameAutor').val(autor.lastName);
 
         $('#idTituloModalAutor').html("Editar Autor");
-        $('#modalAutor').modal({keyboard:true});
+        $('#modalAutor').modal("show");
     }
 
 

@@ -6,40 +6,23 @@
 
 <h1>Listado de Usuarios </h1>
 
-<div class="row" style="">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr class="tableRow">
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">Email</th>
-            </tr>
-        </thead>
-
-        <tbody id="cuerpoUsers"></tbody>
-    </table>
-</div>
-
 <br />
-<div class="row" style="">
-    <table class="table" id="tabla">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Campo1</th>
-                <th scope="col">Campo2</th>
-                <th scope="col">Campo3</th>
-            </tr>
-        </thead>
+<div class="row">
+   <div class="col">
+        <table class="table">
+            <thead class="table-dark">
+                <tr class="">
+                    <th class="col-md-4">Nombre</th>
+                    <th class="col-md-4">Apellidos</th>
+                    <th class="col-md-4">Email</th>
+                </tr>
+            </thead>
 
-       @* <tbody id="cuerpoUsers2">
-            <tr>
-                <th scope="col">valor1</th>
-                <th scope="col">valor2</th>
-                <th scope="col">valor3</th>
-            </tr>
-        </tbody>*@
+            <tbody id="cuerpoUsers"></tbody>
     </table>
+    </div>
 </div>
+
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -68,8 +51,6 @@
                 {
                     listaUsers = data.result;
                     cargarGridUsers(listaUsers);
-                    // cargarNuevoGridUsers(listaUsers); // pruebas
-                    prueba(listaUsers);
                     console.log(listaUsers);
                 }else{
                     Swal.fire(
@@ -87,59 +68,21 @@
     }
 
     function cargarGridUsers(data){
-        $("#cuerpoUsers").html("");
+        $("#cuerpoUsers").html(""); // seleccionar donde se va insertar
 
         for(var i=0; i < data.length; i++){
             var tr=`
              <tr>
-                <th>`+ data[i].name+ `</th>
-                <th>`+ data[i].lastName +`</th>
-                <th>`+ data[i].email +`</th>
+                <td>`+ data[i].name+ `</td>
+                <td>`+ data[i].lastName +`</td>
+                <td>`+ data[i].userName +`</td>
             </tr>
             `;
             $("#cuerpoUsers").append(tr);
         }
     }
 
-    function cargarNuevoGridUsers(data) {
-        $("#cuerpoUsers2").html(""); // seleccionar donde se va insertar
-        console.log("datos ", data);
-        for (var i = 0; i < data.length; i++) {
-            var tr = `
-                 <tr class="fila">
-                    <th>`+ data[i].name + `</th>
-                    <th>`+ data[i].lastName + `</th>
-                    <th>`+ data[i].email + `</th>
-                </tr>
-                `;
-            $("#cuerpoUsers2").append(tr);
-        }
-    }
   
-
-    function prueba(data){
-        let tablaProducto = document.getElementById("tabla");
-        let cuerpoTabla = document.createElement('tbody');
-        console.log("info ", listaUsers);
-        listaUsers.forEach(p => {
-            let fila = document.createElement('tr');
-
-            let td = document.createElement('td');
-            td.innerText = p.name;
-            fila.appendChild(td);
-
-            td = document.createElement('td');
-            td.innerText = p.lastName;
-            fila.appendChild(td);
-
-            td = document.createElement('td');
-            td.innerText = p.email;
-            fila.appendChild(td);
-
-            cuerpoTabla.appendChild(fila);
-        });
-        tablaProducto.appendChild(cuerpoTabla);
-    }
     
 
 </script>

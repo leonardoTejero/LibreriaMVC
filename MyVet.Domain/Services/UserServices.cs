@@ -87,11 +87,36 @@ namespace libreriaNeoris.Domain.Services
             Dictionary<string, string> headers = new Dictionary<string, string>();
 
             ResponseDto response = await _restService.PostRestServiceAsync<ResponseDto>(urlBase, controller, method, parameters, headers);
-            //if (response.IsSuccess)
-                //return response;
 
             return response;
         }
+
+        public async Task<ResponseDto> UpdateUser(UserDto user, String token)
+        {
+            string urlBase = _config.GetSection("ApiLibreriaNeoris").GetSection("UrlBase").Value;
+            string controller = _config.GetSection("ApiLibreriaNeoris").GetSection("ControllerUser").Value;
+            string method = _config.GetSection("ApiLibreriaNeoris").GetSection("MethodUpdateUser").Value;
+
+            UserDto parameters = new UserDto()
+            {
+                UserName = user.UserName,
+                Password = user.Password,
+                ConfirmPassword = user.ConfirmPassword,
+                Name = user.Name,
+                LastName= user.LastName,
+            };
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+            headers.Add("Token", token);
+
+            ResponseDto response = await _restService.PutRestServiceAsync<ResponseDto>(urlBase, controller, method, parameters, headers);
+            //if (response.IsSuccess)
+            //    return response;
+
+            return response;
+        }
+
+
         #endregion
     }
 }

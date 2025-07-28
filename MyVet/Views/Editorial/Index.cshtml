@@ -10,36 +10,36 @@
 
     <h1>Listado de Editoriales</h1>
 @{
-    if (isAdmin || isEstand){
+    if (isAdmin){
          <p>
              <button class="btn btn-primary" onclick="nuevaEditorial()">
-                 Nueva Editorial
+                <i class="fas fa-plus"></i> Nueva Editorial
              </button>
         </p>
     }
 }
-   
 
-    <div class="row">
 
+<div class="row mt-5 mb-5" >
+    <div class="col p-0">
         <table class="table">
-            <thead class="thead-dark">
+            <thead class="table-dark">
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Sede</th>
+                    <th class="col-md-6">Nombre</th>
+                    <th class="col-md-6">Sede</th> 
                     @{
-                        if (isAdmin || isEstand)
+                        if (isAdmin)
                         {
-                             <th scope="col">Opciones</th>
+                            <th class="col-md-2">Opciones</th>
                         }
-                    }  
+                     }  
                 </tr>
             </thead>
 
             <tbody id="cuerpoEditoriales"></tbody>
         </table>
-
     </div>
+</div>
 
 
     @*modal*@
@@ -68,7 +68,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <i class="fas fa-window-close"></i>
                         Cancelar
                     </button>
@@ -135,8 +135,8 @@
                 @{
                     if (isAdmin || isEstand)
                     {
-                        <button  class="btn btn-warning" onclick="editarEditorial(`+ data[i].id +`)"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn btn-danger" onclick="eliminarEditorial(`+ data[i].id +`)"><i class="far fa-trash-alt"></i> Eliminar</button>
+                        <button class="btn btn-warning" onclick="editarEditorial(`+ data[i].id + `)" ><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger"  onclick="eliminarEditorial(`+ data[i].id + `)" ><i class="far fa-trash-alt"></i> </button>
                     }
                 }
                 </td>
@@ -147,7 +147,7 @@
         }
     }
 
-function eliminarEditorial(idEditorial)
+    function eliminarEditorial(idEditorial)
     {
         console.log("mandó a eliminar", idEditorial);
         Swal.fire({
@@ -203,7 +203,8 @@ function eliminarEditorial(idEditorial)
     function nuevaEditorial(){
 
        $('#idTitulomodalEditorial').html("Crear Editorial");
-       $('#modalEditorial').modal({keyboard:true});
+       $('#modalEditorial').modal("show");
+       limpiarForm();
     }
 
     function guardarEditorial(){
@@ -314,7 +315,7 @@ function eliminarEditorial(idEditorial)
         $('#txtCampusEditorial').val(autor.campus);
 
         $('#idTitulomodalEditorial').html("Editar Autor");
-        $('#modalEditorial').modal({keyboard:true});
+        $('#modalEditorial').modal("show");
     }
 
 

@@ -69,3 +69,21 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+#card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 10px;
+}
+
+.buscar{
+    border-radius: 7px;
+    width: 30%;
+    border: solid 1px;
+    padding: 5px;
+    height: 45px;
+}

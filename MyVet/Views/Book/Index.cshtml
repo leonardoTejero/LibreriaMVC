@@ -9,46 +9,52 @@
 }
 
 
-    <h1>Listado de Libros</h1>
-@{
-    if (isAdmin || isEstand)
-    {
-        <p>
-            <button class="btn btn-primary" onclick="nuevoLibro()">
-                <i ></i> Nuevo libro
-            </button>
-         </p>
+<h1>Listado de Libros</h1>
+
+
+<div class="d-flex justify-content-between">
+    @{
+        if (isAdmin || isEstand)
+        {
+            <p>
+                <button class="btn btn-primary" onclick="nuevoLibro()">
+                    <i class="fas fa-plus"></i> Nuevo libro
+                </button>
+            </p>
+        }
     }
-}   
+    <input type="text" id="search-input" placeholder="🔍Buscar libros..." class="buscar">
+</div>
 
-    <div class="row">
 
+<div class="row mt-5 mb-5">
+    <div class="col p-0">
         <table class="table">
-            <thead class="thead-dark">
+            <thead class="table-dark">
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Sinopsis</th>
-                    <th scope="col">Numero de paginas</th>
-                    <th scope="col">Autor</th>
-                    <th scope="col">Editorial</th>
+                    <th class="col-2"> Nombre</th>
+                    <th class="col-6"> Sinopsis</th>
+                    <th class="col-1"> Páginas</th>
+                    <th class="col-2"> Autor</th>
+                    <th class="col-1"> Editorial</th>
                     @{
                         if (isAdmin || isEstand)
                         {
-                             <th scope="col">Opciones</th>
+                            <th class=""> Opciones</th>
                         }
                      }
                 </tr>
             </thead>
-
+            
             <tbody id="cuerpoLibros"></tbody>
         </table>
-
     </div>
+</div>
 
 
-    @*modal*@
+
+    @*modal crear libro*@
     <div class="modal fade" id="modalLibro" tabindex="1" role="dialog" aria-labelledby="modalLibroLabel" aria-hidden="true">
-
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -95,12 +101,10 @@
                             </div>
                         </div>
 
-
-
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         <i class="fas fa-window-close"></i>
                         Cancelar
                     </button>
@@ -174,17 +178,17 @@
         for(var i=0; i<data.length; i++){
             var tr=`
              <tr>
-                <th>`+ data[i].name+ `</th>
-                <th> `+ data[i].synopsis +`</th>
-                <th> `+ data[i].numberPages +`</th>
-                <th> `+ data[i].author +`</th>
-                <th> `+ data[i].editorial +`</th>
+                <th style="font-weight:initial">`+ data[i].name + `</th>
+                <th style="font-weight:initial"> `+ data[i].synopsis + `</th>
+                <th style="font-weight:initial"> `+ data[i].numberPages + `</th>
+                <th style="font-weight:initial"> `+ data[i].author + `</th>
+                <th style="font-weight:initial"> `+ data[i].editorial + `</th>
                 <td>
                  @{
-                      if (isAdmin || isEstand){
-                             <button  class="btn btn-warning" onclick="editarBook(`+ data[i].id +`)"><i class="fas fa-edit"></i> Editar</button>
-                             <button class="btn btn-danger" onclick="eliminarBook(`+ data[i].id +`)"><i class="far fa-trash-alt"></i> Eliminar</button>
-                         }
+                    if (isAdmin || isEstand){
+                            <button  class="btn btn-warning" onclick="editarBook(`+ data[i].id +`)"><i class="fas fa-edit"></i> Editar</button>
+                            <button class="btn btn-danger" onclick="eliminarBook(`+ data[i].id +`)"><i class="far fa-trash-alt"></i> Eliminar</button>
+                        }
                 }  
                 </td>
             </tr>
@@ -247,12 +251,14 @@
 
     function nuevoLibro(){
 
+        console.log("nuevo libro");
         limpiarForm();
         if(listaEditoriales.length==0){
             getEditoriales();
         }
         $('#idTitulomodalLibro').html("Crear Libro");
-        $('#modalLibro').modal({keyboard:true});
+        //$('#modalLibro').modal({keyboard:true});
+        $('#modalLibro').modal("show");
     }
 
     function getEditoriales()
@@ -468,6 +474,7 @@
 
     function editarBook(id)
     {
+        console.log("editar libro");
         idBook = id;
 
         let book = listaBooks.find(x=>x.id == idBook);
@@ -487,7 +494,9 @@
         cargarAutores(listaAutores, idAutor);
 
         $('#idTitulomodalLibro').html("Editar Libro");
-        $('#modalLibro').modal({keyboard:true});
+        //$('#modalLibro').modal({keyboard:true});
+        $('#modalLibro').modal("show");
     }
+
 </script>
 

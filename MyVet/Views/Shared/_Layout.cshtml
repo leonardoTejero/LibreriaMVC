@@ -14,15 +14,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0" />*@
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewData["Title"] - LibreriaNeoris</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
           integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
 
@@ -57,7 +59,7 @@
                                 {
                                      <li class="nav-item">
                                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
-                                        </li>  
+                                     </li>  
                                 }
                              }                       
                             <li class="nav-item">
@@ -65,11 +67,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Index">Libros</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Editorial" asp-action="Index">Editoriales</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Editorial" asp-action="Index">Editoriales</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Index">Libros</a>
                             </li>
                         
                     </ul>
@@ -100,13 +102,18 @@
             &copy; 2022 - libreria - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"
             integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w=="
             crossorigin="anonymous"
-            referrerpolicy="no-referrer"></script>
+            referrerpolicy="no-referrer">
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.6/dist/sweetalert2.all.min.js"></script>
     @RenderSection("Scripts", required: false)
@@ -116,7 +123,7 @@
 <script>
     $(document).ready(function () {
 
-     });
+    });
 
      function modalProcesando(desplegar)
      {
@@ -130,7 +137,7 @@
          }
      }
 
-     function toastMessage(type,message)
+     function toastMessage(type, message)
      {
          const Toast = Swal.mixin({
              toast: true,
@@ -141,12 +148,13 @@
              didOpen: (toast) => {
                  toast.addEventListener('mouseenter', Swal.stopTimer)
                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-             }});
+             }
+         });
 
-             Toast.fire({
-                 icon: type,
-                 title: message
-             });
+         Toast.fire({
+             icon: type,
+             title: message
+         });
      }
 
 

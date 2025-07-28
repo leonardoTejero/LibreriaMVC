@@ -42,5 +42,15 @@ namespace libreriaNeoris.Controllers
             return Ok(response);
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(UserDto user)
+        {
+            var claim = HttpContext.User;
+            string token = claim.Claims.FirstOrDefault(x => x.Type == TypeClaims.Token).Value;
+
+            ResponseDto response = await _userServices.UpdateUser(user, token);
+            return Ok(response);
+
+        }
     }
 }
