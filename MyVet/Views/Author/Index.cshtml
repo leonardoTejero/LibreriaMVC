@@ -1,5 +1,4 @@
-﻿
-@using Common.Utils.Enums
+﻿@using Common.Utils.Enums
 @using static Common.Utils.Constant.Const
 @{
     ViewData["Title"] = "Autores";
@@ -26,27 +25,26 @@
 
 <div class="row mt-5 mb-5">
     <div class="col p-0">
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th class="col-md-6">Nombre</th>
-                    <th class="col-md-6">Apellido</th>
-                    @{
-                        if (isAdmin || isEstand)
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        @if (isAdmin || isEstand)
                         {
-                             <th scope="col">Opciones</th> 
+                            <th scope="col">Opciones</th>
                         }
-                    }                         
-                </tr>
-            </thead>
-
-            <tbody id="cuerpoAutores"></tbody>
-        </table>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoAutores"></tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 
-    @*modal*@
+    @*modal nuevo autor*@
     <div class="modal fade" id="modalAutor" tabindex="1" role="dialog" aria-labelledby="modalAutorLabel" aria-hidden="true">
 
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -133,8 +131,8 @@
         for(var i=0; i<data.length; i++){
             var tr=`
              <tr>
-                <th>`+ data[i].name+ `</th>
-                <th> `+ data[i].lastName +`</th>
+                <td>`+ data[i].name+ `</td>
+                <td> `+ data[i].lastName +`</td>
                 <td>
                  @{
                     if(isAdmin || isEstand)

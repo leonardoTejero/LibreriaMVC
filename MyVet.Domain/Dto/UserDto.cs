@@ -7,7 +7,7 @@ namespace libreriaNeoris.Domain.Dto
 
         [Required(ErrorMessage = "El email es requerido")]
         [MaxLength(200)]
-        [Display(Name = "Email")]
+        [Display(Name = "Correo")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "El nombre es requerido")]
