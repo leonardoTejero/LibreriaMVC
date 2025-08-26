@@ -60,7 +60,7 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin: 0;
 }
 .footer {
   position: absolute;
@@ -88,11 +88,6 @@ body {
     height: 45px;
 }
 
-.container {
-    padding-left: 3rem;
-    padding-right: 3rem;
-}
-
 .custom-container {
     max-width: 1100px; 
     margin-left: auto;
@@ -107,9 +102,16 @@ body {
 }
 
 .login-card-bg {
-    background: rgba(255, 255, 255, 0.40); /* Fondo blanco con opacidad */
+    background: rgba(255, 255, 255, 0.70); /* Fondo blanco con opacidad */
     border-radius: 12px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.15);
     padding: 2rem;
     width: 100%;
+}
+
+.centrado {
+    display: flex;
+    align-items: center; /* centra vertical */
+    justify-content: center; /* centra horizontal */
+    min-height: 100vh; /* alto mínimo de toda la pantalla */
 }
