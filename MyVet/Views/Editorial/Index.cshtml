@@ -25,12 +25,12 @@
         <table class="table">
             <thead class="table-dark">
                 <tr>
-                    <th class="col-md-6">Nombre</th>
-                    <th class="col-md-6">Sede</th> 
+                    <th class="col-md-5">Nombre</th>
+                    <th class="col-md-4">Sede</th> 
                     @{
                         if (isAdmin)
                         {
-                            <th class="col-md-2">Opciones</th>
+                            <th class="col-md-3">Opciones</th>
                         }
                      }  
                 </tr>
@@ -125,7 +125,7 @@
     function cargarGridEditoriales(data){
 
         $("#cuerpoEditoriales").html("");
-        console.log(data);
+
         for(var i=0; i<data.length; i++){
             var tr=`
              <tr>
@@ -135,8 +135,8 @@
                 @{
                     if (isAdmin || isEstand)
                     {
-                        <button class="btn btn-warning" onclick="editarEditorial(`+ data[i].id + `)" ><i class="fas fa-edit"></i>Editar</button>
-                        <button class="btn btn-danger"  onclick="eliminarEditorial(`+ data[i].id + `)" ><i class="far fa-trash-alt"></i>Eliminar</button>
+                        <button class="btn btn-warning" onclick="editarEditorial(`+ data[i].id + `)" ><i class="fas fa-edit"></i> Editar </button>
+                        <button class="btn btn-danger"  onclick="eliminarEditorial(`+ data[i].id + `)" ><i class="far fa-trash-alt"></i> Eliminar</button>
                     }
                 }
                 </td>
