@@ -12,6 +12,7 @@ namespace libreriaNeoris.Domain.Services.Interface
         Task<ResponseDto> Register(UserDto user);
         Task<ResponseDto> GetAllUsers(string token);
         Task<ResponseDto> UpdateUser(UserDto user, String token);
+        Task<ResponseDto> RequestPasswordReset(string email);
 
     }
 }

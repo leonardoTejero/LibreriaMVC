@@ -156,5 +156,35 @@ namespace libreriaNeoris.Controllers
             }
             return response;
         }
+
+
+        [HttpGet]
+        public IActionResult ForgotPass()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPass(string email)
+        {
+            
+            if (string.IsNullOrEmpty(email))
+            {
+                ModelState.AddModelError("Email", "El correo es obligatorio.");
+                return View();
+            }
+
+            var response = await _userServices.RequestPasswordReset(email);
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
     }
 }

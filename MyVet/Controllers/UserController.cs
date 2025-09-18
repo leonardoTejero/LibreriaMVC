@@ -1,13 +1,10 @@
 ﻿using Common.Utils.RestServices.Interface;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using libreriaNeoris.Domain.Dto;
 using libreriaNeoris.Domain.Services.Interface;
 using libreriaNeoris.Handlers;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using static Common.Utils.Constant.Const;
 

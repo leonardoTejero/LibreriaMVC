@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Recuperar Contraseña";
+    Layout = "_LayoutLogin";
+}
+
+<div class="centrado">
+    <div class="row login-card-bg mx-auto" style="width: 400px;">
+        <div class="col-12 animate__animated animate__fadeIn mx-auto">
+            <div class="text-center mb-3">
+                <h3 class="fw-bold">¿Olvidaste tu contraseña?</h3>
+            </div>
+            <div>
+                <section>
+                    <form asp-controller="Auth" asp-action="ForgotPass" method="post">
+                        <div class="mb-3">
+                            <label for="Email" class="form-label fw-bold">Correo electrónico</label>
+                            <input type="email" name="Email" id="Email" class="form-control" required maxlength="100" placeholder="Ingresa tu correo" />
+                        </div>
+                        <div class="mb-3" style="text-align:right">
+                            <input type="submit" value="Enviar correo de recuperacion" class="btn btn-primary" />
+                        </div>
+                        <div class="mb-2 text-center">
+                            <a asp-action="Login">Volver al inicio de sesion</a>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

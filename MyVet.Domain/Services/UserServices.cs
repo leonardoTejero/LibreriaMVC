@@ -110,12 +110,25 @@ namespace libreriaNeoris.Domain.Services
             headers.Add("Token", token);
 
             ResponseDto response = await _restService.PutRestServiceAsync<ResponseDto>(urlBase, controller, method, parameters, headers);
-            //if (response.IsSuccess)
-            //    return response;
 
             return response;
         }
 
+        public async Task<ResponseDto> RequestPasswordReset(string email)
+        {
+            string urlBase = _config.GetSection("ApiLibreriaNeoris").GetSection("UrlBase").Value;
+            string controller = _config.GetSection("ApiLibreriaNeoris").GetSection("ControlerAuthentication").Value;
+            string method = _config.GetSection("ApiLibreriaNeoris").GetSection("MethodRequestPasswordReset").Value;
+
+            var parameters = new {   Email = email };
+
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+
+            // Realizar la solicitud POST al endpoint de recuperación de contraseña
+            ResponseDto response = await _restService.PostRestServiceAsync<ResponseDto>(urlBase, controller, method, parameters, headers);
+
+            return response;
+        }
 
         #endregion
     }
